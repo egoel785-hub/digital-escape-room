@@ -60,7 +60,7 @@ digital-escape-room/
 
 | Field         | Details                    |
 | ------------- | -------------------------- |
-| **Name**      | _Ekankshi goel_           |
+| **Name**      | _Ekankshi Goel_           |
 | **Roll No.**  | _2026UCS1699_         |
 | **Course**    | _Computer Science and Engineering_         |
 | **College**   | _Netaji Subhash Institute of Technology_        |
