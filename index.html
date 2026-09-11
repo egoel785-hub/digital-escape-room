@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Digital Escape Room - Lab 204</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========== WELCOME SCREEN ========== -->
+    <div class="wrap" id="welcomeScreen">
+        <div class="welcome-card">
+            <h1>🔐 DIGITAL ESCAPE ROOM</h1>
+            <p class="welcome-lab">💻 COMPUTER LAB 204</p>
+            <div class="welcome-story">
+                <p>The lab computer has malfunctioned and all doors are locked!</p>
+                <p>You have <strong>5 minutes</strong> to solve 8 challenges and escape.</p>
+                <p>Answer questions correctly to collect keys and unlock doors.</p>
+                <p>Be careful — you only have <strong>3 lives!</strong></p>
+            </div>
+            <div class="name-section">
+                <label for="nameInput">Enter your name, Agent:</label>
+                <input type="text" id="nameInput" placeholder="Your name..." maxlength="30">
+                <button class="start-btn" id="startBtn">🚀 START ESCAPE</button>
+            </div>
+            <div class="welcome-rules">
+                <p><strong>Rules:</strong></p>
+                <p>✅ +100 points for each correct answer</p>
+                <p>💡 -10 points if you use a hint</p>
+                <p>❤️ Lose a life for each wrong answer</p>
+                <p>⏱️ Beat the clock to escape!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== GAME AREA ========== -->
+    <div class="wrap" id="gameArea" style="display:none;">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>🔐 DIGITAL ESCAPE ROOM</h1>
+            <p class="lab-name">💻 COMPUTER LAB 204</p>
+            <p class="player-tag">Agent: <span id="playerName">Agent</span></p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-box" id="livesBox">❤️ ❤️ ❤️</div>
+            <div class="stat-box">🔑 Keys: <span id="keyCount">0</span>/4</div>
+            <div class="stat-box">🏆 Score: <span id="scoreCount">0</span></div>
+            <div class="stat-box">🔥 Streak: <span id="streakCount">0</span></div>
+            <div class="stat-box">⏱️ <span id="clock">05:00</span></div>
+        </div>
+
+        <!-- Progress -->
+        <div class="prog-bar">
+            <div class="prog-fill" id="pFill"></div>
+        </div>
+        <p class="prog-text" id="pText">Progress: 0%</p>
+
+        <!-- Doors -->
+        <div class="doors-grid">
+            <div class="door-item" id="d1">🚪 Door 1: <span class="d-open" id="ds1">🔓 OPEN</span></div>
+            <div class="door-item" id="d2">🚪 Door 2: <span class="d-locked" id="ds2">🔒 LOCKED</span></div>
+            <div class="door-item" id="d3">🚪 Door 3: <span class="d-locked" id="ds3">🔒 LOCKED</span></div>
+            <div class="door-item" id="d4">🚪 EXIT: <span class="d-locked" id="ds4">🔒 LOCKED</span></div>
+        </div>
+
+        <!-- Question Card -->
+        <div class="q-card" id="qCard">
+            <div class="q-door-label" id="qDoor">🚪 DOOR 1</div>
+            <div class="q-category" id="qCat">BINARY SECURITY LOCK</div>
+            <p class="q-counter" id="qCounter">Question 1 / 8</p>
+            <p class="q-text" id="qText"></p>
+            <div class="opts" id="optsArea"></div>
+
+            <button class="hint-btn" id="hintBtn">💡 NEED A HINT?</button>
+            <p class="hint-box" id="hintBox"></p>
+
+            <button class="submit-btn" id="submitBtn">SUBMIT ANSWER</button>
+            <div class="fb" id="fbArea"></div>
+            <button class="next-btn" id="nextBtn">NEXT QUESTION ➡️</button>
+        </div>
+
+        <!-- Terminal -->
+        <div class="terminal">
+            <div class="t-head">💻 SYSTEM TERMINAL — Lab 204</div>
+            <div class="t-body" id="tBody">
+                <p>> SYSTEM STARTING...</p>
+                <p>> Lab 204 security active.</p>
+                <p>> All doors locked.</p>
+                <p>> Waiting for input...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== GAME OVER ========== -->
+    <div class="overlay" id="ovGameOver">
+        <div class="pop pop-fail">
+            <h2>💀 GAME OVER</h2>
+            <p>The computer lab security system</p>
+            <p>has locked you inside!</p>
+            <button class="pop-btn" onclick="restart()">🔄 TRY AGAIN</button>
+        </div>
+    </div>
+
+    <!-- ========== TIME UP ========== -->
+    <div class="overlay" id="ovTimeUp">
+        <div class="pop pop-fail">
+            <h2>⏰ TIME'S UP!</h2>
+            <p>💀 You could not escape the lab in time.</p>
+            <button class="pop-btn" onclick="restart()">🔄 TRY AGAIN</button>
+        </div>
+    </div>
+
+    <!-- ========== DOOR UNLOCKED ========== -->
+    <div class="overlay" id="ovDoor">
+        <div class="pop pop-key">
+            <h2 id="popDoorTitle">🔓 DOOR 1 UNLOCKED!</h2>
+            <p id="popDoorMsg">🔑 KEY 1 COLLECTED!</p>
+            <button class="pop-btn" onclick="closeDoorPop()">CONTINUE ➡️</button>
+        </div>
+    </div>
+
+    <!-- ========== ESCAPED ========== -->
+    <div class="overlay" id="ovEscape">
+        <div class="pop pop-win">
+            <h2>🎉 YOU ESCAPED!</h2>
+            <p>🔓 Final exit unlocked!</p>
+            <p>🔑 All 4 keys collected!</p>
+            <button class="pop-btn" onclick="showReport()">📝 VIEW MISSION REPORT</button>
+        </div>
+    </div>
+
+    <!-- ========== RESULTS PAGE ========== -->
+    <div class="results-page" id="resultsPage">
+        <div class="wrap">
+            <h1 class="results-title">📝 MISSION REPORT</h1>
+            <div class="agent-badge" id="agentBadge"></div>
+            <div id="reportArea"></div>
+            <div class="sum-box" id="sumArea"></div>
+            <button class="again-btn" onclick="restart()">🔄 PLAY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
