@@ -32,19 +32,6 @@ You are trapped inside **Computer Lab 204**! The lab computer has malfunctioned 
 
 No frameworks, libraries, or external dependencies.
 
-## 🚀 How to Run
-
-1. Download or clone this repository.
-2. Open `index.html` in any web browser.
-3. That's it! No server or build step needed.
-
-```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/digital-escape-room.git
-
-# Open in browser
-# Simply double-click index.html or open it in your browser
-```
 
 ## 📁 File Structure
 
