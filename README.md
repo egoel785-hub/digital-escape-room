@@ -56,17 +56,6 @@ digital-escape-room/
 └── README.md     ← This file
 ```
 
-## 🌐 Deployment (Vercel)
-
-This project can be deployed as a static website on [Vercel](https://vercel.com):
-
-1. Push this project to a GitHub repository.
-2. Go to [vercel.com](https://vercel.com) and sign in with GitHub.
-3. Click **"Add New Project"** → Import your GitHub repository.
-4. Leave all settings as default (no build command needed).
-5. Click **Deploy**.
-6. Your live URL will be ready in a few seconds!
-
 ## 👨‍🎓 Author
 
 | Field         | Details                    |
